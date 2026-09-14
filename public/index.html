@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Lassoisms</title>
+  <meta name="description" content="Tap for a random Ted Lasso quote. Filter by character." />
+  <meta name="theme-color" content="#0a2c5e" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="icon.svg" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="pitch" aria-hidden="true"></div>
+
+  <main id="stage" class="stage" tabindex="0" aria-label="Tap for another quote">
+    <header class="wordmark">
+      <span class="believe">BELIEVE</span>
+    </header>
+
+    <section class="quote-wrap">
+      <blockquote id="quote" class="quote" aria-live="polite">&nbsp;</blockquote>
+      <p id="attrib" class="attrib"></p>
+    </section>
+
+    <p id="hint" class="hint">Tap anywhere for another</p>
+  </main>
+
+  <div class="dock" id="dock">
+    <button id="toggleFilters" class="dock-toggle" aria-expanded="false" aria-controls="chips">
+      <span id="toggleLabel">All characters</span>
+      <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M6 15l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div id="chips" class="chips" role="group" aria-label="Filter by character" hidden></div>
+  </div>
+
+  <button id="share" class="share" type="button" aria-label="Copy or share this quote">
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M8.7 13.4l6.6 3.8M15.3 6.8L8.7 10.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="18" cy="5" r="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="6" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="19" r="3" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+  </button>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

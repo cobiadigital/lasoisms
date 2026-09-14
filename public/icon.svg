@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#0a2c5e"/>
+  <rect x="96" y="150" width="320" height="212" rx="10" fill="#f4d35e"/>
+  <text x="256" y="288" font-family="Georgia, 'Times New Roman', serif" font-size="86" font-weight="700" letter-spacing="4" text-anchor="middle" fill="#0a2c5e">BELIEVE</text>
+</svg>
