@@ -33,6 +33,11 @@ files plus a JSON dataset.
   with `url` set as a link share and drops the attachment.
 - **About sheet**, opened from the BELIEVE tag: what the corner dot means, plus links
   to Ko-fi, the GitHub repo, and benbrenner.com.
+- **Shared links carry the quote.** The share button appends `?q=<id>`, where the id is
+  a hash of the quote's text rather than its position, so a link survives the dataset
+  being reordered or added to. Opening such a link shows that quote first even if it
+  falls outside the reader's saved character filter; the filter reasserts on the next
+  tap, and the stale `?q=` is dropped from the address bar at that point.
 - Respects `prefers-reduced-motion` and iOS safe-area insets.
 
 ## Editing the quotes
@@ -89,6 +94,20 @@ by the crowd. If you spot another, fix `character` in `quotes.json`.
 English Wikiquote has no Ted Lasso article, and the fan wiki's HTML and the transcript sites
 all refuse automated requests, so nothing here was scraped. The dataset is a hand-curated core
 plus the megapost lines, which are short excerpts credited to their compiler above.
+
+## Social previews
+
+`index.html` carries Open Graph and Twitter card tags pointing at `og-image.png`
+(1200x630, the large-card ratio). The URLs are **absolute**, hardcoded to
+`https://lasso.cobia.dev`: Facebook does not resolve a relative `og:image`, it drops
+it. If the domain moves, every `lasso.cobia.dev` in the head has to move with it.
+
+One limit worth knowing: **the preview is the same for every link.** Facebook's crawler
+reads the raw HTML and never runs JavaScript, so it cannot see which quote a `?q=` link
+points at. Showing the actual quote in the card would need the tags written server-side,
+which means putting a small Worker in front of the assets instead of serving them
+directly. The deep link itself works regardless: the card is generic, the page it opens
+is not.
 
 ## Deploying (Cloudflare Workers Builds)
 
