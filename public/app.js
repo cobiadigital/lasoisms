@@ -15,6 +15,10 @@
     toggleLabel: document.getElementById('toggleLabel'),
     share: document.getElementById('share'),
     flag: document.getElementById('flag'),
+    about: document.getElementById('about'),
+    aboutSheet: document.getElementById('about-sheet'),
+    aboutBackdrop: document.getElementById('about-backdrop'),
+    aboutClose: document.getElementById('about-close'),
     toast: document.getElementById('toast')
   };
 
@@ -25,6 +29,7 @@
   let deck = [];
   let current = null;
   let busy = false;
+  let sharing = false;
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -177,24 +182,186 @@
     toast.timer = setTimeout(() => el.toast.classList.remove('show'), 1600);
   }
 
+  const CARD = { size: 1080, name: 'lassoisms-quote.png' };
+
+  /**
+   * Draw the quote as a square card: the same blue ground, gold tag and serif
+   * setting as the page, so a shared image reads as this app. Original layout,
+   * text only, no marks from the show.
+   */
+  function drawCard(q) {
+    const S = CARD.size;
+    const canvas = document.createElement('canvas');
+    canvas.width = canvas.height = S;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return null;
+
+    const sky = ctx.createLinearGradient(0, 0, S * 0.35, S);
+    sky.addColorStop(0, '#0a2c5e');
+    sky.addColorStop(1, '#061c3d');
+    ctx.fillStyle = sky;
+    ctx.fillRect(0, 0, S, S);
+
+    // The same diagonal kit stripes the page uses, drawn as rotated bands.
+    ctx.save();
+    ctx.translate(S / 2, S / 2);
+    ctx.rotate(-25 * Math.PI / 180);
+    ctx.fillStyle = 'rgba(255,255,255,.035)';
+    for (let x = -S; x < S; x += 96) ctx.fillRect(x, -S, 48, S * 2);
+    ctx.restore();
+
+    // Gold tag, tilted like the one on the page.
+    ctx.save();
+    ctx.translate(S / 2, S * 0.135);
+    ctx.rotate(-1.2 * Math.PI / 180);
+    ctx.font = '700 30px Georgia, "Times New Roman", serif';
+    const label = 'B E L I E V E';
+    const tagW = ctx.measureText(label).width + 64;
+    ctx.fillStyle = '#f4d35e';
+    ctx.fillRect(-tagW / 2, -30, tagW, 60);
+    ctx.fillStyle = '#0a2c5e';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(label, 0, 2);
+    ctx.restore();
+
+    // Quote, shrunk until it fits the middle band.
+    const maxW = S * 0.8;
+    const maxH = S * 0.46;
+    const text = '\u201C' + q.quote + '\u201D';
+    let size = 74;
+    let lines = [];
+    for (; size >= 30; size -= 2) {
+      ctx.font = size + 'px Georgia, "Times New Roman", serif';
+      lines = wrap(ctx, text, maxW);
+      if (lines.length * size * 1.3 <= maxH) break;
+    }
+    ctx.fillStyle = '#f7f4ec';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    const lead = size * 1.3;
+    const top = S / 2 - ((lines.length - 1) * lead) / 2;
+    lines.forEach((line, i) => ctx.fillText(line, S / 2, top + i * lead));
+
+    ctx.font = '700 26px Helvetica, Arial, sans-serif';
+    ctx.fillStyle = '#f4d35e';
+    ctx.fillText(spaced('\u2014 ' + q.character.toUpperCase()), S / 2, S * 0.78);
+
+    ctx.font = '20px Helvetica, Arial, sans-serif';
+    ctx.fillStyle = 'rgba(247,244,236,.45)';
+    ctx.fillText(location.host || 'lassoisms', S / 2, S * 0.93);
+
+    return canvas;
+  }
+
+  function spaced(s) { return s.split('').join('\u2009'); }
+
+  function wrap(ctx, text, maxWidth) {
+    const words = text.split(' ');
+    const lines = [];
+    let line = '';
+    for (const word of words) {
+      const next = line ? line + ' ' + word : word;
+      if (ctx.measureText(next).width > maxWidth && line) {
+        lines.push(line);
+        line = word;
+      } else {
+        line = next;
+      }
+    }
+    if (line) lines.push(line);
+    return lines;
+  }
+
+  function cardFile(q) {
+    return new Promise((resolve) => {
+      let canvas;
+      try {
+        canvas = drawCard(q);
+      } catch (_) {
+        resolve(null);
+        return;
+      }
+      if (!canvas || !canvas.toBlob) { resolve(null); return; }
+      canvas.toBlob((blob) => {
+        resolve(blob ? new File([blob], CARD.name, { type: 'image/png' }) : null);
+      }, 'image/png');
+    });
+  }
+
+  function download(file) {
+    const url = URL.createObjectURL(file);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = file.name;
+    link.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  /**
+   * Hand the quote over as a picture and a link: the system share sheet on a
+   * phone, the clipboard and a saved PNG elsewhere.
+   *
+   * The link rides in `text` rather than `url`, because iOS treats a share
+   * with `url` set as a link share and silently drops the attachment.
+   */
   async function shareCurrent() {
-    if (!current) return;
-    const text = '“' + current.quote + '” — ' + current.character;
+    if (!current || sharing) return;
+    sharing = true;
+    el.share.disabled = true;
+    const link = location.origin + location.pathname;
+    const text = '\u201C' + current.quote + '\u201D \u2014 ' + current.character + '\n' + link;
     try {
-      if (navigator.share) {
-        await navigator.share({ text });
+      toast('Drawing the card\u2026');
+      const file = await cardFile(current);
+      if (file && navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({ files: [file], title: 'Lassoisms', text });
+        toast('Shared');
         return;
       }
       await navigator.clipboard.writeText(text);
-      toast('Copied');
+      if (file) {
+        download(file);
+        toast('Copied, and the card saved');
+      } else {
+        toast('Copied');
+      }
     } catch (err) {
-      if (err && err.name === 'AbortError') return;
+      if (err && err.name === 'AbortError') { toast('Share cancelled'); return; }
       toast('Could not share');
+    } finally {
+      sharing = false;
+      el.share.disabled = false;
     }
   }
 
+  function openAbout() {
+    el.aboutSheet.hidden = false;
+    el.aboutBackdrop.hidden = false;
+    // Let the hidden attribute clear before the transform animates in.
+    requestAnimationFrame(() => {
+      el.aboutSheet.classList.add('open');
+      el.aboutBackdrop.classList.add('open');
+    });
+    el.about.setAttribute('aria-expanded', 'true');
+    el.aboutClose.focus({ preventScroll: true });
+  }
+
+  function closeAbout() {
+    el.aboutSheet.classList.remove('open');
+    el.aboutBackdrop.classList.remove('open');
+    el.about.setAttribute('aria-expanded', 'false');
+    setTimeout(() => {
+      el.aboutSheet.hidden = true;
+      el.aboutBackdrop.hidden = true;
+    }, reduceMotion ? 0 : 260);
+  }
+
   function wireEvents() {
-    el.stage.addEventListener('click', advance);
+    el.stage.addEventListener('click', () => {
+      if (!el.aboutSheet.hidden) { closeAbout(); return; }
+      advance();
+    });
 
     el.stage.addEventListener('keydown', (e) => {
       if (e.key === ' ' || e.key === 'Enter' || e.key === 'ArrowRight' || e.key === 'ArrowDown') {
@@ -225,6 +392,17 @@
       e.stopPropagation();
       if (!current) return;
       toast(current.verified ? 'Confirmed against a source' : 'Not confirmed against a source');
+    });
+
+    el.about.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (el.aboutSheet.hidden) openAbout(); else closeAbout();
+    });
+    el.aboutClose.addEventListener('click', (e) => { e.stopPropagation(); closeAbout(); });
+    el.aboutBackdrop.addEventListener('click', (e) => { e.stopPropagation(); closeAbout(); });
+    el.aboutSheet.addEventListener('click', (e) => e.stopPropagation());
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !el.aboutSheet.hidden) closeAbout();
     });
 
     el.toggle.addEventListener('click', () => {
