@@ -47,11 +47,34 @@ Add an object to `quotes` and it appears immediately — counts, chips and the
 character list are all derived from the data at load time. A character that
 isn't in `order` still shows up, just after the ordered ones.
 
-Currently 97 quotes across 12 characters. They were curated from memory rather
-than scraped, so a few are lightly paraphrased. If you ever want a sourced,
-citable set, [Wikiquote's Ted Lasso page](https://en.wikiquote.org/wiki/Ted_Lasso)
-is CC BY-SA and has a clean MediaWiki API; quoting it here would mean adding an
-attribution line to the footer.
+Currently 97 quotes across 12 characters.
+
+### The `verified` flag
+
+Each quote carries `"verified": true|false`, written by `tools/verify_quotes.py`.
+
+- `true` (15 of 97) means the line matched word-for-word against the
+  [Ted Lasso fan wiki](https://tedlasso.fandom.com) — all 353 of its content pages,
+  compared as overlapping five-word windows.
+- `false` means **that check did not confirm it, not that the line is wrong.** The wiki is
+  written as plot summary and quotes very little dialogue, so a miss is weak evidence.
+  Treat unverified lines as remembered-but-unconfirmed and correct any that read wrong.
+
+Re-run the check any time with `python3 tools/verify_quotes.py` (add `--dry-run` to report
+without rewriting the file). It only rewrites the flags; it never adds or edits quote text.
+
+### Why the dataset isn't bigger
+
+Sourcing it automatically turned out to be a dead end:
+
+- **English Wikiquote has no Ted Lasso article at all** — `/wiki/Ted_Lasso` is a 404 and a
+  full-text search returns nothing related.
+- The fan wiki and the transcript sites (scrapsfromtheloft, subslikescript) return 403 to
+  automated requests; the fan wiki's MediaWiki API still answers, which is what the verifier uses.
+- Bulk-importing episode transcripts would mean redistributing the show's script, which is a
+  different thing from a handful of short, widely-quoted lines.
+
+So the set stays hand-curated and deliberately small. Adding a line is a one-object edit.
 
 ## Deploying (Cloudflare Workers Builds)
 
