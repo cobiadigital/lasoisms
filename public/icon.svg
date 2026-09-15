@@ -1,5 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="TED">
+  <!-- Letterforms are drawn as paths, not <text>: a favicon renders wherever the
+       browser likes, and a missing font there would reflow or clip the word. -->
   <rect width="512" height="512" rx="96" fill="#0a2c5e"/>
-  <rect x="96" y="150" width="320" height="212" rx="10" fill="#f4d35e"/>
-  <text x="256" y="288" font-family="Georgia, 'Times New Roman', serif" font-size="86" font-weight="700" letter-spacing="4" text-anchor="middle" fill="#0a2c5e">BELIEVE</text>
+  <g transform="rotate(-2 256 256)">
+    <rect x="96" y="186" width="320" height="140" rx="10" fill="#f4d35e"/>
+    <g fill="#0a2c5e" fill-rule="evenodd">
+      <path d="M136 214 H200 V234 H178 V298 H158 V234 H136 Z"/>
+      <path d="M224 214 H288 V234 H244 V246 H280 V266 H244 V278 H288 V298 H224 Z"/>
+      <path d="M312 214 H348 C366 214 376 230 376 256 C376 282 366 298 348 298 H312 Z
+               M332 234 V278 H346 C356 278 356 234 346 234 Z"/>
+    </g>
+  </g>
 </svg>
