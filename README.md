@@ -47,34 +47,43 @@ Add an object to `quotes` and it appears immediately — counts, chips and the
 character list are all derived from the data at load time. A character that
 isn't in `order` still shows up, just after the ordered ones.
 
-Currently 97 quotes across 12 characters.
+Currently 214 quotes across 27 characters, 156 of them verified.
 
 ### The `verified` flag
 
-Each quote carries `"verified": true|false`, written by `tools/verify_quotes.py`.
+Each quote carries `"verified": true|false`, written by `tools/verify_quotes.py`, which checks
+two independent sources:
 
-- `true` (15 of 97) means the line matched word-for-word against the
-  [Ted Lasso fan wiki](https://tedlasso.fandom.com) — all 353 of its content pages,
-  compared as overlapping five-word windows.
-- `false` means **that check did not confirm it, not that the line is wrong.** The wiki is
-  written as plot summary and quotes very little dialogue, so a miss is weak evidence.
-  Treat unverified lines as remembered-but-unconfirmed and correct any that read wrong.
+1. The [Ted Lasso fan wiki](https://tedlasso.fandom.com), fetched live through its MediaWiki
+   API and matched as overlapping five-word windows. It is mostly plot summary, so it quotes
+   dialogue only here and there.
+2. Any `.tsv` under `tools/sources/` (`speaker<TAB>quote`), transcribed from published quote
+   compilations. `megapost.tsv` holds the lines transcribed from the *330+ Ted Lasso Quotes*
+   megapost at Minimize My Mess, compiled by its author from the episode transcripts.
 
-Re-run the check any time with `python3 tools/verify_quotes.py` (add `--dry-run` to report
-without rewriting the file). It only rewrites the flags; it never adds or edits quote text.
+A quote is verified if **either** source confirms it. `false` means neither did, **not** that
+the line is wrong. Treat unverified lines as remembered-but-unconfirmed.
 
-### Why the dataset isn't bigger
+```
+python3 tools/verify_quotes.py            # both sources
+python3 tools/verify_quotes.py --dry-run  # report without writing
+python3 tools/verify_quotes.py --offline  # skip the wiki fetch
+```
 
-Sourcing it automatically turned out to be a dead end:
+It only ever rewrites flags; it never adds or edits quote text.
 
-- **English Wikiquote has no Ted Lasso article at all** — `/wiki/Ted_Lasso` is a 404 and a
-  full-text search returns nothing related.
-- The fan wiki and the transcript sites (scrapsfromtheloft, subslikescript) return 403 to
-  automated requests; the fan wiki's MediaWiki API still answers, which is what the verifier uses.
-- Bulk-importing episode transcripts would mean redistributing the show's script, which is a
-  different thing from a handful of short, widely-quoted lines.
+### Attribution conflicts
 
-So the set stays hand-curated and deliberately small. Adding a line is a one-object edit.
+Cross-checking the two sources caught three lines credited to the wrong person, all since
+corrected: the "tall Yodas" line is Jamie's rather than Ted's, the "truth will set you free"
+line belongs to Dr. Sharon and was duplicated under Ted, and the "Jamie Tartt" chant is sung
+by the crowd. If you spot another, fix `character` in `quotes.json`.
+
+### On sourcing
+
+English Wikiquote has no Ted Lasso article, and the fan wiki's HTML and the transcript sites
+all refuse automated requests, so nothing here was scraped. The dataset is a hand-curated core
+plus the megapost lines, which are short excerpts credited to their compiler above.
 
 ## Deploying (Cloudflare Workers Builds)
 

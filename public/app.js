@@ -211,7 +211,19 @@
       const open = el.chips.hidden;
       el.chips.hidden = !open;
       el.toggle.setAttribute('aria-expanded', String(open));
+      el.dock.classList.toggle('open', open);
+      el.hint.hidden = open;
     });
+
+    // The dock's height changes with the character count and when the panel opens,
+    // so the stage reserves exactly as much room as the dock actually occupies.
+    const trackDock = () => {
+      const h = Math.ceil(el.dock.getBoundingClientRect().height);
+      document.documentElement.style.setProperty('--dock-h', h + 'px');
+    };
+    if (window.ResizeObserver) new ResizeObserver(trackDock).observe(el.dock);
+    window.addEventListener('resize', trackDock);
+    trackDock();
   }
 
   async function init() {
