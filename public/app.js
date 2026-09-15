@@ -2,6 +2,7 @@
   'use strict';
 
   const STORAGE_KEY = 'lassoisms.characters.v1';
+  const DEFAULT_CHARACTER = 'Ted Lasso';
   const el = {
     stage: document.getElementById('stage'),
     wrap: document.querySelector('.quote-wrap'),
@@ -13,6 +14,7 @@
     toggle: document.getElementById('toggleFilters'),
     toggleLabel: document.getElementById('toggleLabel'),
     share: document.getElementById('share'),
+    flag: document.getElementById('flag'),
     toast: document.getElementById('toast')
   };
 
@@ -26,14 +28,19 @@
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // First visit opens on Ted alone; everyone else is opt-in from the dock.
+  function defaultSelection(all) {
+    return new Set(all.includes(DEFAULT_CHARACTER) ? [DEFAULT_CHARACTER] : all);
+  }
+
   function loadSelection(all) {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return new Set(all);
+      if (!raw) return defaultSelection(all);
       const saved = JSON.parse(raw).filter((c) => all.includes(c));
-      return saved.length ? new Set(saved) : new Set(all);
+      return saved.length ? new Set(saved) : defaultSelection(all);
     } catch (_) {
-      return new Set(all);
+      return defaultSelection(all);
     }
   }
 
@@ -77,6 +84,8 @@
       el.quote.className = 'quote';
       el.attrib.textContent = '';
       el.attrib.hidden = true;
+      el.flag.className = 'flag';
+      el.flag.hidden = true;
       return;
     }
     current = q;
@@ -84,6 +93,11 @@
     el.quote.className = sizeClass(q.quote);
     el.attrib.hidden = false;
     el.attrib.textContent = q.character;
+    el.flag.hidden = false;
+    el.flag.className = 'flag ' + (q.verified ? 'verified' : 'unverified');
+    el.flag.setAttribute('aria-label', q.verified
+      ? 'Confirmed against a source'
+      : 'Not confirmed against a source');
   }
 
   function advance() {
@@ -205,6 +219,12 @@
     el.share.addEventListener('click', (e) => {
       e.stopPropagation();
       shareCurrent();
+    });
+
+    el.flag.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (!current) return;
+      toast(current.verified ? 'Confirmed against a source' : 'Not confirmed against a source');
     });
 
     el.toggle.addEventListener('click', () => {
