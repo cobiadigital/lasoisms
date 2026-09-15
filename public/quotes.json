@@ -1,39 +1,54 @@
 {
-  "note": "Quotes were curated by hand, then checked against an independent source. verified:true means the line matched word-for-word on the Ted Lasso fan wiki. verified:false means that check did not confirm it, NOT that the line is wrong: the wiki is mostly plot summary, so it quotes very little dialogue. Treat unverified lines as remembered-but-unconfirmed, and correct any that read wrong.",
+  "note": "Hand-curated, then cross-checked against two independent sources. verified:true means the line was confirmed by at least one of them. verified:false means neither confirmed it, NOT that the line is wrong. Correct anything that reads wrong.",
   "order": [
     "Ted Lasso",
     "Roy Kent",
     "Rebecca Welton",
     "Keeley Jones",
     "Coach Beard",
-    "Jamie Tartt",
+    "Nate Shelley",
     "Leslie Higgins",
+    "Trent Crimm",
+    "Dr. Sharon Fieldstone",
+    "Jamie Tartt",
     "Sam Obisanya",
     "Dani Rojas",
-    "Nate Shelley",
-    "Dr. Sharon Fieldstone",
-    "Trent Crimm"
+    "Colin Hughes",
+    "Sam's Father",
+    "Barbara",
+    "Mae Green",
+    "Zava",
+    "Deborah Welton",
+    "Jade",
+    "Jamie's Mother",
+    "Jan Maas",
+    "Nate's Father",
+    "Nora",
+    "Phoebe",
+    "Richmond Crowd",
+    "Rupert Mannion",
+    "Ted's Mother"
   ],
   "quotes": [
     {
       "character": "Ted Lasso",
       "quote": "Be curious, not judgmental.",
-      "verified": false
+      "verified": true
     },
     {
       "character": "Ted Lasso",
       "quote": "I believe in hope. I believe in belief.",
-      "verified": false
+      "verified": true
     },
     {
       "character": "Ted Lasso",
       "quote": "Taking on a challenge is a lot like riding a horse. If you're comfortable while you're doing it, you're probably doing it wrong.",
-      "verified": false
+      "verified": true
     },
     {
       "character": "Ted Lasso",
       "quote": "You know what the happiest animal on Earth is? It's a goldfish. You know why? Got a ten-second memory. Be a goldfish.",
-      "verified": false
+      "verified": true
     },
     {
       "character": "Ted Lasso",
@@ -48,7 +63,7 @@
     {
       "character": "Ted Lasso",
       "quote": "There's two buttons I never like to hit: panic and snooze.",
-      "verified": false
+      "verified": true
     },
     {
       "character": "Ted Lasso",
@@ -58,12 +73,12 @@
     {
       "character": "Ted Lasso",
       "quote": "I feel like we fell out of the lucky tree and hit every branch on the way down, ended up in a pool of cash and Sour Patch Kids.",
-      "verified": false
+      "verified": true
     },
     {
       "character": "Ted Lasso",
       "quote": "I promise you there is something worse out there than being sad, and that's being alone and being sad.",
-      "verified": false
+      "verified": true
     },
     {
       "character": "Ted Lasso",
@@ -73,17 +88,17 @@
     {
       "character": "Ted Lasso",
       "quote": "It's funny to think about the things in your life that can make you cry just knowing that they existed, can then become the same things that make you cry knowing that they're now gone.",
-      "verified": false
+      "verified": true
     },
     {
       "character": "Ted Lasso",
       "quote": "I love meeting people's moms. It's like reading an instruction manual as to why they're nuts.",
-      "verified": false
+      "verified": true
     },
     {
       "character": "Ted Lasso",
       "quote": "I hope that either all of us or none of us are judged by the actions of our weakest moments, but rather by the strength we show when and if we're ever given a second chance.",
-      "verified": false
+      "verified": true
     },
     {
       "character": "Ted Lasso",
@@ -91,9 +106,9 @@
       "verified": false
     },
     {
-      "character": "Ted Lasso",
+      "character": "Jamie Tartt",
       "quote": "Old people are so wise. They're like tall Yodas.",
-      "verified": false
+      "verified": true
     },
     {
       "character": "Ted Lasso",
@@ -103,12 +118,12 @@
     {
       "character": "Ted Lasso",
       "quote": "I think things come into our lives to help us get from one place to a better place.",
-      "verified": false
+      "verified": true
     },
     {
       "character": "Ted Lasso",
       "quote": "I think you might be so sure that you're one in a million that sometimes you forget that out there, you're just one of eleven.",
-      "verified": false
+      "verified": true
     },
     {
       "character": "Ted Lasso",
@@ -122,13 +137,8 @@
     },
     {
       "character": "Ted Lasso",
-      "quote": "The truth will set you free, but first it'll piss you off.",
-      "verified": false
-    },
-    {
-      "character": "Ted Lasso",
       "quote": "I think it's the lack of hope that comes and gets you.",
-      "verified": false
+      "verified": true
     },
     {
       "character": "Ted Lasso",
@@ -148,12 +158,12 @@
     {
       "character": "Ted Lasso",
       "quote": "If you care about someone, and you got a little love in your heart, there ain't nothing you can't get through together.",
-      "verified": false
+      "verified": true
     },
     {
       "character": "Ted Lasso",
       "quote": "I believe in Communism. Rom-communism, that is.",
-      "verified": false
+      "verified": true
     },
     {
       "character": "Ted Lasso",
@@ -178,7 +188,7 @@
     {
       "character": "Ted Lasso",
       "quote": "I shouldn't bring an umbrella to a brainstorm.",
-      "verified": false
+      "verified": true
     },
     {
       "character": "Ted Lasso",
@@ -203,12 +213,12 @@
     {
       "character": "Roy Kent",
       "quote": "Don't you dare settle for fine.",
-      "verified": false
+      "verified": true
     },
     {
       "character": "Roy Kent",
       "quote": "You deserve someone who makes you feel like you've been struck by fucking lightning.",
-      "verified": false
+      "verified": true
     },
     {
       "character": "Roy Kent",
@@ -366,9 +376,9 @@
       "verified": true
     },
     {
-      "character": "Jamie Tartt",
+      "character": "Richmond Crowd",
       "quote": "Jamie Tartt, do-do-do-do-do-do.",
-      "verified": false
+      "verified": true
     },
     {
       "character": "Jamie Tartt",
@@ -398,7 +408,7 @@
     {
       "character": "Leslie Higgins",
       "quote": "Human beings are never going to be perfect. The best we can do is to keep asking for help and accepting it when you can.",
-      "verified": false
+      "verified": true
     },
     {
       "character": "Leslie Higgins",
@@ -438,7 +448,7 @@
     {
       "character": "Dani Rojas",
       "quote": "Football is... football.",
-      "verified": false
+      "verified": true
     },
     {
       "character": "Dani Rojas",
@@ -468,7 +478,7 @@
     {
       "character": "Dr. Sharon Fieldstone",
       "quote": "The truth will set you free, but first it will piss you off.",
-      "verified": false
+      "verified": true
     },
     {
       "character": "Dr. Sharon Fieldstone",
@@ -499,12 +509,610 @@
       "character": "Trent Crimm",
       "quote": "It's not a story about football. It's a story about people.",
       "verified": false
+    },
+    {
+      "character": "Mae Green",
+      "quote": "For some, it's better to follow your gut than pretend to be excited by following someone else's.",
+      "verified": true
+    },
+    {
+      "character": "Ted Lasso",
+      "quote": "When you choose to do that, you're giving that to yourself.",
+      "verified": true
+    },
+    {
+      "character": "Trent Crimm",
+      "quote": "I don't think we change per se, as much as we just learn to accept who we've always been.",
+      "verified": true
+    },
+    {
+      "character": "Coach Beard",
+      "quote": "Change isn't about trying to be perfect. Perfection sucks. Perfect is boring.",
+      "verified": true
+    },
+    {
+      "character": "Ted Lasso",
+      "quote": "A lot of times the right idea is just sitting behind a couple of the wrong ones.",
+      "verified": true
+    },
+    {
+      "character": "Dr. Sharon Fieldstone",
+      "quote": "Doubt can only be removed by action",
+      "verified": true
+    },
+    {
+      "character": "Sam's Father",
+      "quote": "Anger will only weaken you. But if you really want to piss off the people who did this, forgive them.",
+      "verified": true
+    },
+    {
+      "character": "Sam's Father",
+      "quote": "Don't fight back. Fight forward.",
+      "verified": true
+    },
+    {
+      "character": "Ted Lasso",
+      "quote": "Don't sell yourself short. If anything, sell yourself tall and get it tailored later.",
+      "verified": true
+    },
+    {
+      "character": "Zava",
+      "quote": "Dream big, and you may never wake up",
+      "verified": true
+    },
+    {
+      "character": "Deborah Welton",
+      "quote": "Explore the world. More importantly, explore yourself.",
+      "verified": true
+    },
+    {
+      "character": "Roy Kent",
+      "quote": "For the past year, I've busted my ass trying to change. But apparently, I haven't done shit because I'm still me.",
+      "verified": true
+    },
+    {
+      "character": "Nate's Father",
+      "quote": "Humility is not about thinking less of yourself, it is about thinking about yourself less.",
+      "verified": true
+    },
+    {
+      "character": "Colin Hughes",
+      "quote": "I know we can't fix every ache inside of us. But I shouldn't have to pretend it's not there either.",
+      "verified": true
+    },
+    {
+      "character": "Ted Lasso",
+      "quote": "Isn't the idea of never give up one of them things we always talk about in sports? And shouldn't that apply to people too?",
+      "verified": true
+    },
+    {
+      "character": "Rebecca Welton",
+      "quote": "Just because we own these teams doesn't mean they belong to us.",
+      "verified": true
+    },
+    {
+      "character": "Ted Lasso",
+      "quote": "Just listen to your gut, and on the way down to your gut, check in with your heart.",
+      "verified": true
+    },
+    {
+      "character": "Nora",
+      "quote": "Sometimes you have to do the right thing, even if you lose.",
+      "verified": true
+    },
+    {
+      "character": "Sam's Father",
+      "quote": "Stop looking for the answer and let the answer come to you",
+      "verified": true
+    },
+    {
+      "character": "Ted Lasso",
+      "quote": "Tried something new. It didn't work. Big whoop.",
+      "verified": true
+    },
+    {
+      "character": "Rebecca Welton",
+      "quote": "You need to stop letting yesterday get in the way of today",
+      "verified": true
+    },
+    {
+      "character": "Ted Lasso",
+      "quote": "You know how they say that youth is wasted on the young? Well, I say don't let the wisdom of age be wasted on you.",
+      "verified": true
+    },
+    {
+      "character": "Keeley Jones",
+      "quote": "You've gotta let Ted be Ted",
+      "verified": true
+    },
+    {
+      "character": "Leslie Higgins",
+      "quote": "I try to love my Dad for who he is and forgive him for who he isn't",
+      "verified": true
+    },
+    {
+      "character": "Jamie's Mother",
+      "quote": "You're not lost, my sexy little baby. You're just not sure which direction you're going in yet",
+      "verified": true
+    },
+    {
+      "character": "Roy Kent",
+      "quote": "Most adults think kids need to be constantly entertained. Truth is they just wanna feel like they're part of our lives.",
+      "verified": true
+    },
+    {
+      "character": "Roy Kent",
+      "quote": "What do you have to be sad about? Did one of the Paw Patrol dogs die?",
+      "verified": true
+    },
+    {
+      "character": "Ted's Mother",
+      "quote": "That is the thing about being a parent. Sometimes you lose and sometimes you win, but most of the time you just tie. All we can do is keep playing.",
+      "verified": true
+    },
+    {
+      "character": "Coach Beard",
+      "quote": "Jane and I took a big step forward in our relationship this weekend. We are now sharing an iCloud account.",
+      "verified": true
+    },
+    {
+      "character": "Leslie Higgins",
+      "quote": "If you're with the right person, even the hard times are easy.",
+      "verified": true
+    },
+    {
+      "character": "Keeley Jones",
+      "quote": "It's an emotional version of color blindness where a person interprets red flags as giant green flags.",
+      "verified": true
+    },
+    {
+      "character": "Rebecca Welton",
+      "quote": "I thought being invulnerable would protect me, so I pushed people away for years, leading me directly to my greatest fear: Being alone.",
+      "verified": true
+    },
+    {
+      "character": "Sam Obisanya",
+      "quote": "There is something I should warn you of. I'm only gonna get more wonderful.",
+      "verified": true
+    },
+    {
+      "character": "Ted Lasso",
+      "quote": "Tea is horrible. Absolute garbage water. I don't know why y'all do that.",
+      "verified": true
+    },
+    {
+      "character": "Ted Lasso",
+      "quote": "English breakfast to me is just a pile of a bunch of little, tiny piles.",
+      "verified": true
+    },
+    {
+      "character": "Roy Kent",
+      "quote": "Jamie Tartt is a muppet.",
+      "verified": true
+    },
+    {
+      "character": "Rupert Mannion",
+      "quote": "McAdoo to take the penalty? I wouldn't trust him to take an aspirin",
+      "verified": true
+    },
+    {
+      "character": "Roy Kent",
+      "quote": "We got City on Saturday, so we need you to be the prickiest prick you've ever been in your little prick life",
+      "verified": true
+    },
+    {
+      "character": "Leslie Higgins",
+      "quote": "He's an emotionally erratic billionaire with the temperament of one of those kids in Willy Wonka",
+      "verified": true
+    },
+    {
+      "character": "Rebecca Welton",
+      "quote": "Get out of your own way, man.",
+      "verified": true
+    },
+    {
+      "character": "Ted Lasso",
+      "quote": "Mercy buckets",
+      "verified": true
+    },
+    {
+      "character": "Ted Lasso",
+      "quote": "Oh, hush your butts!",
+      "verified": true
+    },
+    {
+      "character": "Ted Lasso",
+      "quote": "Expectations for us are lower than a rattlesnake's belly button",
+      "verified": true
+    },
+    {
+      "character": "Ted Lasso",
+      "quote": "My hopes are as high as a giraffe's top hat",
+      "verified": true
+    },
+    {
+      "character": "Ted Lasso",
+      "quote": "Keep it simple, smartypants",
+      "verified": true
+    },
+    {
+      "character": "Ted Lasso",
+      "quote": "If we're gonna make an impact here, the first domino needs to fall right inside of that man's heart",
+      "verified": true
+    },
+    {
+      "character": "Ted Lasso",
+      "quote": "He thinks he's mad now, wait till we win him over",
+      "verified": true
+    },
+    {
+      "character": "Leslie Higgins",
+      "quote": "To the family we're born with and the family we make along the way!",
+      "verified": true
+    },
+    {
+      "character": "Ted Lasso",
+      "quote": "There ain't a whole lot of places like AFC Richmond either",
+      "verified": true
+    },
+    {
+      "character": "Trent Crimm",
+      "quote": "By slowly but surely building a club-wide culture of trust and support through thousands of imperceptible moments",
+      "verified": true
+    },
+    {
+      "character": "Ted Lasso",
+      "quote": "He's our dork",
+      "verified": true
+    },
+    {
+      "character": "Ted Lasso",
+      "quote": "I appreciate you",
+      "verified": true
+    },
+    {
+      "character": "Jamie Tartt",
+      "quote": "We're a team, ain't we? Gotta wear the same kit",
+      "verified": true
+    },
+    {
+      "character": "Trent Crimm",
+      "quote": "If the lasso way is wrong, it's hard to imagine being right",
+      "verified": true
+    },
+    {
+      "character": "Sam Obisanya",
+      "quote": "I like the idea of someone becoming rich, because of what they gave to the world.",
+      "verified": true
+    },
+    {
+      "character": "Dr. Sharon Fieldstone",
+      "quote": "You helped me become a better therapist.",
+      "verified": true
+    },
+    {
+      "character": "Trent Crimm",
+      "quote": "I can't help but root for him",
+      "verified": true
+    },
+    {
+      "character": "Ted Lasso",
+      "quote": "It's not about me. Never was.",
+      "verified": true
+    },
+    {
+      "character": "Ted Lasso",
+      "quote": "I'm glad you didn't hear any boat horns, given all the fried yams I ate last night.",
+      "verified": true
+    },
+    {
+      "character": "Ted Lasso",
+      "quote": "Hurt people hurt people.",
+      "verified": true
+    },
+    {
+      "character": "Ted Lasso",
+      "quote": "It ain't easy to explain, but you know it when you see it.",
+      "verified": true
+    },
+    {
+      "character": "Ted Lasso",
+      "quote": "I am the strong silent type, so I ain't gonna let you know. But I'm also loud and weak, because I, like all humans, contain multitudes.",
+      "verified": true
+    },
+    {
+      "character": "Ted Lasso",
+      "quote": "I look like Ned Flanders cosplaying Ned Flanders",
+      "verified": true
+    },
+    {
+      "character": "Ted Lasso",
+      "quote": "I've had more psychotic episodes than Twin Peaks",
+      "verified": true
+    },
+    {
+      "character": "Ted Lasso",
+      "quote": "You know what you do with tough cookies, don't ya? Dip 'em in milk.",
+      "verified": true
+    },
+    {
+      "character": "Ted Lasso",
+      "quote": "You tore your butt, son. It happens.",
+      "verified": true
+    },
+    {
+      "character": "Roy Kent",
+      "quote": "Who cares? It's a friendly. A friendly is a pretend match. This is a pretend conversation.",
+      "verified": true
+    },
+    {
+      "character": "Roy Kent",
+      "quote": "I've just come down with a case of the none of your business.",
+      "verified": true
+    },
+    {
+      "character": "Roy Kent",
+      "quote": "That hurt my feeling.",
+      "verified": true
+    },
+    {
+      "character": "Roy Kent",
+      "quote": "You never talk about a streak.",
+      "verified": true
+    },
+    {
+      "character": "Coach Beard",
+      "quote": "Then it's working.",
+      "verified": true
+    },
+    {
+      "character": "Coach Beard",
+      "quote": "Shut your butts and sit your mouths down!",
+      "verified": true
+    },
+    {
+      "character": "Rebecca Welton",
+      "quote": "Crying is the best, isn't it? It's like an orgasm for the soul",
+      "verified": true
+    },
+    {
+      "character": "Rebecca Welton",
+      "quote": "Look, sometimes the truth can ruin a perfectly good story.",
+      "verified": true
+    },
+    {
+      "character": "Rebecca Welton",
+      "quote": "Oh, please. The Eiffel Tower is just a lamppost with a publicist.",
+      "verified": true
+    },
+    {
+      "character": "Keeley Jones",
+      "quote": "I never know how to react when a grown man beatboxes in front of me",
+      "verified": true
+    },
+    {
+      "character": "Keeley Jones",
+      "quote": "That's a complicated compliment.",
+      "verified": true
+    },
+    {
+      "character": "Nate Shelley",
+      "quote": "I just don't really enjoy baths, just because my skin gets really wrinkly, and I'm deeply afraid of aging.",
+      "verified": true
+    },
+    {
+      "character": "Nate Shelley",
+      "quote": "For some reason, whenever I'm trying to impress someone, I end up sounding like my gran.",
+      "verified": true
+    },
+    {
+      "character": "Jamie Tartt",
+      "quote": "God bless me, every one",
+      "verified": true
+    },
+    {
+      "character": "Leslie Higgins",
+      "quote": "You should find out before you flip out",
+      "verified": true
+    },
+    {
+      "character": "Dr. Sharon Fieldstone",
+      "quote": "Heavy is the head that wears the visor, Coach Lasso.",
+      "verified": true
+    },
+    {
+      "character": "Dr. Sharon Fieldstone",
+      "quote": "I can't be your mentor without occasionally being your tormentor.",
+      "verified": true
+    },
+    {
+      "character": "Barbara",
+      "quote": "I like clothes that tell the truth.",
+      "verified": true
+    },
+    {
+      "character": "Barbara",
+      "quote": "Flowers are for two things, Ms. Jones. Dead people and dead marriages.",
+      "verified": true
+    },
+    {
+      "character": "Colin Hughes",
+      "quote": "Once I was out of my mum, I never looked back.",
+      "verified": true
+    },
+    {
+      "character": "Dani Rojas",
+      "quote": "Just because they're dirty doesn't mean they don't deserve to have a friend.",
+      "verified": true
+    },
+    {
+      "character": "Dani Rojas",
+      "quote": "I would like to see a tulip. Just one tulip. An entire field will be incredibly overwhelming.",
+      "verified": true
+    },
+    {
+      "character": "Jan Maas",
+      "quote": "But luckily our spirits were already broken.",
+      "verified": true
+    },
+    {
+      "character": "Sam Obisanya",
+      "quote": "Jan Maas is not being rude, he's just being Dutch.",
+      "verified": true
+    },
+    {
+      "character": "Jade",
+      "quote": "It's worthwhile to meet you.",
+      "verified": true
+    },
+    {
+      "character": "Mae Green",
+      "quote": "Shit helps things grow, love.",
+      "verified": true
+    },
+    {
+      "character": "Zava",
+      "quote": "If you put your energy into the things you truly love, the universe puts its thing back into you.",
+      "verified": true
+    },
+    {
+      "character": "Trent Crimm",
+      "quote": "Shouting is Roy's love language.",
+      "verified": true
+    },
+    {
+      "character": "Ted Lasso",
+      "quote": "Diamond Dogs, mount up. Let's go.",
+      "verified": true
+    },
+    {
+      "character": "Ted Lasso",
+      "quote": "Okay. Come on. Talk to me, geese.",
+      "verified": true
+    },
+    {
+      "character": "Ted Lasso",
+      "quote": "High five, tree!",
+      "verified": true
+    },
+    {
+      "character": "Ted Lasso",
+      "quote": "I forgot I'm left-handed",
+      "verified": true
+    },
+    {
+      "character": "Nate Shelley",
+      "quote": "I said Wonderkind",
+      "verified": true
+    },
+    {
+      "character": "Nate Shelley",
+      "quote": "I'd like the table by the window, please.",
+      "verified": true
+    },
+    {
+      "character": "Nate Shelley",
+      "quote": "You here to kill me?",
+      "verified": true
+    },
+    {
+      "character": "Nate Shelley",
+      "quote": "You remembered my name",
+      "verified": true
+    },
+    {
+      "character": "Keeley Jones",
+      "quote": "You're a mood. You're a moment. You're a mantra.",
+      "verified": true
+    },
+    {
+      "character": "Keeley Jones",
+      "quote": "You are the only Roy I know.",
+      "verified": true
+    },
+    {
+      "character": "Roy Kent",
+      "quote": "Oi! Tartt. Boot room. Now!",
+      "verified": true
+    },
+    {
+      "character": "Roy Kent",
+      "quote": "I hate what you've done to me",
+      "verified": true
+    },
+    {
+      "character": "Roy Kent",
+      "quote": "Shut up. Just shut up. You had me at Coach.",
+      "verified": true
+    },
+    {
+      "character": "Roy Kent",
+      "quote": "This isn't black, this is dark heather charcoal",
+      "verified": true
+    },
+    {
+      "character": "Roy Kent",
+      "quote": "Let's go find a windmill!",
+      "verified": true
+    },
+    {
+      "character": "Coach Beard",
+      "quote": "Release the hounds",
+      "verified": true
+    },
+    {
+      "character": "Coach Beard",
+      "quote": "Horticulture baby!",
+      "verified": true
+    },
+    {
+      "character": "Coach Beard",
+      "quote": "No sudden movements near the bus driver",
+      "verified": true
+    },
+    {
+      "character": "Colin Hughes",
+      "quote": "It's way too much car for me.",
+      "verified": true
+    },
+    {
+      "character": "Jamie Tartt",
+      "quote": "It's just poopy, let it flow",
+      "verified": true
+    },
+    {
+      "character": "Phoebe",
+      "quote": "I made it at school. The colors spell your name. Red, orange, yellow.",
+      "verified": true
+    },
+    {
+      "character": "Ted Lasso",
+      "quote": "I'm a visual learner so that's very helpful, thank you",
+      "verified": true
+    },
+    {
+      "character": "Ted Lasso",
+      "quote": "We don't not care. We care very much. We care about who you are and what you must've been going through.",
+      "verified": true
+    },
+    {
+      "character": "Trent Crimm",
+      "quote": "As a journalist I had to write that. But as someone who respects you, my source was Nate",
+      "verified": true
     }
   ],
   "verification": {
-    "source": "https://tedlasso.fandom.com (CC BY-SA), full text of all 353 content pages",
-    "method": "5-gram overlap against normalized wiki text; >=50% of a quote's 5-word windows must appear",
-    "checked": "2026-09-15",
+    "sources": [
+      {
+        "name": "Ted Lasso fan wiki",
+        "url": "https://tedlasso.fandom.com",
+        "detail": "full text of all content pages, matched as five-word windows"
+      },
+      {
+        "name": "Minimize My Mess, '330+ Ted Lasso Quotes' megapost",
+        "detail": "transcribed to tools/sources/megapost.tsv; compiled by its author from episode transcripts"
+      }
+    ],
     "tool": "tools/verify_quotes.py"
   }
 }

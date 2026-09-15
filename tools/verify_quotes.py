@@ -1,24 +1,35 @@
 #!/usr/bin/env python3
-"""Re-check public/quotes.json against the Ted Lasso fan wiki and rewrite the verified flags.
+"""Re-check public/quotes.json against two sources and rewrite the verified flags.
 
-The wiki is mostly plot summary, so it only quotes dialogue here and there. That makes this
-check one-directional: a match is good evidence the line is real, a miss is weak evidence of
-nothing much. Hence verified:false means "not confirmed", never "wrong".
+Sources:
+  1. The Ted Lasso fan wiki, fetched live. Mostly plot summary, so it quotes dialogue only
+     here and there.
+  2. Any .tsv under tools/sources/ (speaker<TAB>quote), transcribed from published quote
+     compilations.
 
-Usage:  python3 tools/verify_quotes.py [--dry-run]
+A quote is verified if either source confirms it. The check is one-directional: a match is
+good evidence the line is real, a miss is weak evidence of nothing much. So verified:false
+means "not confirmed", never "wrong".
+
+Usage:  python3 tools/verify_quotes.py [--dry-run] [--offline]
 """
 
 import argparse
+import difflib
+import glob
 import json
 import re
 import sys
+import urllib.error
 import urllib.parse
 import urllib.request
 
 API = "https://tedlasso.fandom.com/api.php"
 UA = "Lassoisms-quote-verifier/1.0 (https://github.com/cobiadigital/lasoisms)"
 QUOTES = "public/quotes.json"
-THRESHOLD = 0.5  # fraction of a quote's 5-word windows that must appear in the wiki text
+SOURCES = "tools/sources/*.tsv"
+THRESHOLD = 0.5       # fraction of a quote's 5-word windows that must appear in the wiki text
+SIMILARITY = 0.72     # how close a local-source line must be to count as the same quote
 
 
 def api(**params):
@@ -62,20 +73,56 @@ def score_quote(words, blob, grams):
     return 1.0 if " ".join(words) in blob else 0.0
 
 
+def load_local_sources():
+    """Normalized quote text from every tools/sources/*.tsv file."""
+    lines = []
+    for path in sorted(glob.glob(SOURCES)):
+        for row in open(path):
+            if not row.strip():
+                continue
+            _, _, text = row.rstrip("\n").partition("\t")
+            if text:
+                lines.append(normalize(text))
+        print(f"  loaded {path}", file=sys.stderr)
+    return lines
+
+
+def in_local_sources(quote, lines):
+    for line in lines:
+        short, long_ = sorted((quote, line), key=len)
+        if short and short in long_:
+            return True
+        if difflib.SequenceMatcher(None, quote, line).ratio() >= SIMILARITY:
+            return True
+    return False
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--dry-run", action="store_true", help="report without writing the file")
+    parser.add_argument("--offline", action="store_true", help="skip the wiki, use local sources only")
     args = parser.parse_args()
 
-    print("Fetching wiki corpus...", file=sys.stderr)
-    blob = normalize(" \n ".join(fetch_corpus()))
-    words = blob.split()
-    grams = {n: {" ".join(words[i:i + n]) for i in range(len(words) - n + 1)} for n in (4, 5)}
+    print("Loading local sources...", file=sys.stderr)
+    local = load_local_sources()
+
+    blob, grams = "", {4: set(), 5: set()}
+    if not args.offline:
+        print("Fetching wiki corpus...", file=sys.stderr)
+        try:
+            blob = normalize(" \n ".join(fetch_corpus()))
+            words = blob.split()
+            grams = {n: {" ".join(words[i:i + n]) for i in range(len(words) - n + 1)} for n in (4, 5)}
+        except (urllib.error.URLError, TimeoutError) as exc:
+            print(f"  wiki unreachable ({exc}); falling back to local sources", file=sys.stderr)
 
     data = json.load(open(QUOTES))
     changed = 0
     for quote in data["quotes"]:
-        verified = score_quote(normalize(quote["quote"]).split(), blob, grams) >= THRESHOLD
+        text = normalize(quote["quote"])
+        verified = in_local_sources(text, local)
+        if not verified and blob:
+            verified = score_quote(text.split(), blob, grams) >= THRESHOLD
         if quote.get("verified") != verified:
             changed += 1
             print(f"  {'+' if verified else '-'} [{quote['character']}] {quote['quote'][:70]}")

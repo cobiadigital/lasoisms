@@ -45,7 +45,8 @@ body {
   padding:
     calc(var(--safe-top) + 20px)
     20px
-    calc(var(--safe-bottom) + 120px);
+    calc(var(--dock-h, 96px) + 16px);
+  transition: padding-bottom .2s ease;
   cursor: pointer;
   outline: none;
   user-select: none;
@@ -132,6 +133,7 @@ body {
   z-index: 3;
   padding: 10px 12px calc(var(--safe-bottom) + 12px);
   background: linear-gradient(to top, rgba(6,28,61,.96) 55%, rgba(6,28,61,0));
+  transition: background .2s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -157,6 +159,12 @@ body {
 
 .dock-toggle svg { transition: transform .2s ease; }
 .dock-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
+
+.dock.open {
+  background: rgba(6,28,61,.97);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255,255,255,.10);
+}
 
 .chips {
   display: flex;
@@ -199,6 +207,35 @@ body {
 
 .chip.all { border-style: dashed; }
 
+.flag {
+  position: fixed;
+  top: calc(var(--safe-top) + 12px);
+  left: 12px;
+  z-index: 3;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+/* The dot itself, so the tap target stays finger-sized while the mark stays small. */
+.flag::after {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--flag-color, transparent);
+  box-shadow: 0 0 0 1px rgba(0,0,0,.25), 0 0 10px var(--flag-glow, transparent);
+  transition: background .2s ease, box-shadow .2s ease;
+}
+
+.flag.verified   { --flag-color: #4ade80; --flag-glow: rgba(74,222,128,.55); }
+.flag.unverified { --flag-color: #f87171; --flag-glow: rgba(248,113,113,.45); }
+
 .share {
   position: fixed;
   top: calc(var(--safe-top) + 12px);
@@ -236,6 +273,6 @@ body {
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
 @media (prefers-reduced-motion: reduce) {
-  .quote-wrap, .toast, .hint, .dock-toggle svg { transition: none; }
+  .quote-wrap, .toast, .hint, .dock-toggle svg, .stage, .dock, .flag::after { transition: none; }
   .quote-wrap.swap { transform: none; }
 }
