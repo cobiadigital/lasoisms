@@ -2,6 +2,7 @@
   'use strict';
 
   const STORAGE_KEY = 'lassoisms.characters.v1';
+  const LINK_PARAM = 'q';
   const DEFAULT_CHARACTER = 'Ted Lasso';
   const el = {
     stage: document.getElementById('stage'),
@@ -55,6 +56,21 @@
     } catch (_) { /* private mode, ignore */ }
   }
 
+  /**
+   * A short, stable id for a quote, derived from its text rather than its
+   * position, so a shared link survives the dataset being reordered or added to.
+   * Only the text changing breaks it, which is the one case where the old link
+   * genuinely points at something else.
+   */
+  function quoteId(q) {
+    const source = q.character + '|' + q.quote;
+    let hash = 5381;
+    for (let i = 0; i < source.length; i++) {
+      hash = ((hash << 5) + hash + source.charCodeAt(i)) >>> 0;
+    }
+    return hash.toString(36);
+  }
+
   function shuffle(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -105,8 +121,33 @@
       : 'Not confirmed against a source');
   }
 
+  /** The quote a ?q= link asks for, if it names one we still have. */
+  function openedWith() {
+    let id;
+    try {
+      id = new URLSearchParams(location.search).get(LINK_PARAM);
+    } catch (_) {
+      return null;
+    }
+    if (!id) return null;
+    return quotes.find((q) => quoteId(q) === id) || null;
+  }
+
+  /**
+   * Once the reader moves past the shared quote the ?q= in the bar is stale, so
+   * it is dropped. Copying the URL then gives the app, not a link promising a
+   * quote that is no longer on screen.
+   */
+  function clearLinkParam() {
+    if (!location.search.includes(LINK_PARAM + '=')) return;
+    try {
+      history.replaceState(history.state, '', location.pathname);
+    } catch (_) { /* file:// and the like, nothing to clean */ }
+  }
+
   function advance() {
     if (busy) return;
+    clearLinkParam();
     const q = nextQuote();
     if (!q) { paint(null); return; }
     if (reduceMotion) { paint(q); return; }
@@ -309,7 +350,7 @@
     if (!current || sharing) return;
     sharing = true;
     el.share.disabled = true;
-    const link = location.origin + location.pathname;
+    const link = location.origin + location.pathname + '?' + LINK_PARAM + '=' + quoteId(current);
     const text = '\u201C' + current.quote + '\u201D \u2014 ' + current.character + '\n' + link;
     try {
       toast('Drawing the card\u2026');
@@ -449,7 +490,17 @@
     buildChips();
     syncChips();
     wireEvents();
-    advance();
+
+    // A shared link names a quote. Show that one first, whatever the saved
+    // filter says, or the recipient opens on something unrelated to the link
+    // they followed.
+    const requested = openedWith();
+    if (requested) {
+      paint(requested);
+      deck = deck.filter((q) => q !== requested);
+    } else {
+      advance();
+    }
     el.stage.focus({ preventScroll: true });
     setTimeout(() => el.hint.classList.add('faded'), 4000);
   }
