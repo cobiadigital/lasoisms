@@ -26,8 +26,13 @@ files plus a JSON dataset.
 - **Character filter:** tap the pill at the bottom to open multi-select chips, each
   showing how many quotes that character has. "Everyone" toggles all on or off.
   Your selection is remembered in `localStorage`.
-- **Share button** (top right) uses the native share sheet on mobile and falls
-  back to copying the quote to the clipboard.
+- **Share button** (top right) draws the quote as a square PNG card and hands it to
+  the native share sheet as a file, the same flow as the weather app and the synth.
+  Where file sharing is unavailable it copies the quote and link and saves the card
+  instead. The link rides in `text` rather than `url`, because iOS treats a share
+  with `url` set as a link share and drops the attachment.
+- **About sheet**, opened from the BELIEVE tag: what the corner dot means, plus links
+  to Ko-fi, the GitHub repo, and benbrenner.com.
 - Respects `prefers-reduced-motion` and iOS safe-area insets.
 
 ## Editing the quotes
